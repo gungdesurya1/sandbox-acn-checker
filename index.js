@@ -12,7 +12,6 @@ validationApp.controller("mainController", function ($scope) {
     const isFormatValid = acn.match(pattern) ? true : false;
     $scope.form.acn.$setValidity("format", isFormatValid);
     if (!isFormatValid) return false;
-    console.log("still");
 
     acn = acn.replaceAll(" ", "");
     let totalWeight = 0;
@@ -29,5 +28,6 @@ validationApp.controller("mainController", function ($scope) {
 
     const isACNValid = acn[8] == complement;
     $scope.form.acn.$setValidity("acnValid", isACNValid);
+    return isACNValid;
   };
 });
