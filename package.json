@@ -1,0 +1,17 @@
+{
+  "name": "sandbox-acn-checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server",
+    "live-reload": "livereload",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3",
+    "livereload": "^0.9.2"
+  }
+}
