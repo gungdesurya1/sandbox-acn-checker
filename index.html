@@ -14,6 +14,8 @@
       sc.src = "index.js?v" + Math.random();
       s.parentNode.insertBefore(sc, s);
     </script>
+
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container" ng-controller="mainController">
@@ -21,37 +23,35 @@
         <h1>ACN Checker</h1>
         <form name="form" ng-submit="onSubmit(form.$valid)" novalidate>
           <div class="form-group">
-            <label>Name</label>
             <input
               type="text"
               name="acn"
-              class="form-control"
+              class="textbox"
               ng-model="acn"
               ng-required="{ boolean }"
               ng-keyup="onChangeAcn(event=$event.target.value)"
+              placeholder="Input ACN here..."
               required
             />
             <p
               ng-show="form.acn.$error.required && !form.acn.$pristine"
-              class="help-block"
+              class="text-error"
             >
               You name is required.
             </p>
-            <p>{{form.acn.errors.acn}}</p>
-            <p ng-show="form.acn.$error.format" class="help-block">
-              ACN should be 9 digits of number
-            </p>
-            <p ng-show="form.acn.$error.acnValid" class="help-block">
-              ACN format is invalid
-            </p>
+            <div ng-show="!form.acn.$error.required">
+              <p ng-show="form.acn.$error.format" class="text-error">
+                ACN should be 9 digits of number
+              </p>
+              <p
+                ng-show="!form.acn.$error.format && form.acn.$error.acnValid"
+                class="text-error"
+              >
+                ACN format is invalid
+              </p>
+            </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-              ng-disabled="form.$invalid"
-            >
-              Submit
-            </button>
+            <button type="submit" ng-disabled="form.$invalid">Submit</button>
           </div>
         </form>
       </div>
