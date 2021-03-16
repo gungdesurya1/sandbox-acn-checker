@@ -1,6 +1,6 @@
-var validationApp = angular.module("ACNApp", []);
+var ACNApp = angular.module("ACNApp", []);
 
-validationApp.controller("mainController", function ($scope) {
+ACNApp.controller("mainController", function ($scope, mainService) {
   $scope.onSubmit = function (isValid) {
     if (isValid) {
       alert("ACN is valid");
@@ -8,10 +8,15 @@ validationApp.controller("mainController", function ($scope) {
   };
 
   $scope.onChangeAcn = function (acn) {
+    const acnValidation = mainService.isAcnValid(acn);
+    $scope.form.acn.$error = {};
+    $scope.form.acn.$setValidity(acnValidation.label, acnValidation.status);
+  };
+}).service("mainService", function () {
+  this.isAcnValid = function (acn) {
     const pattern = /^(\d{3} \d{3} \d{3}|\d{9})$/i;
     const isFormatValid = acn.match(pattern) ? true : false;
-    $scope.form.acn.$setValidity("format", isFormatValid);
-    if (!isFormatValid) return false;
+    if (!isFormatValid) return { status: false, label: "format" };
 
     acn = acn.replaceAll(" ", "");
     let totalWeight = 0;
@@ -26,8 +31,7 @@ validationApp.controller("mainController", function ($scope) {
     let complement = 10 - remainder;
     if (complement == 10) complement = 0;
 
-    const isACNValid = acn[8] == complement;
-    $scope.form.acn.$setValidity("acnValid", isACNValid);
-    return isACNValid;
+    const isAcnValid = acn[8] == complement;
+    return { status: isAcnValid, label: "acnValid" };
   };
 });

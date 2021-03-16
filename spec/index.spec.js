@@ -10,8 +10,6 @@ describe("AcnCheckController", function () {
     controller = $controller("mainController", {
       $scope: $scope,
     });
-
-    $scope.form = { acn: { $setValidity: function () {} } };
   }));
 
   describe("$scope.onChangeAcn", function () {
@@ -33,9 +31,11 @@ describe("AcnCheckController", function () {
     ];
 
     it("should be a valid ACN", function () {
-      for (let index = 0; index < validACN.length; index++) {
-        expect($scope.onChangeAcn(validACN[index])).toBeTrue();
-      }
+      inject(function (mainService) {
+        for (let index = 0; index < validACN.length; index++) {
+          expect(mainService.isAcnValid(validACN[index]).status).toBeTrue();
+        }
+      });
     });
 
     const invalidACN = [
@@ -50,9 +50,11 @@ describe("AcnCheckController", function () {
     ];
 
     it("should be an invalid ACN", function () {
-      for (let index = 0; index < invalidACN.length; index++) {
-        expect($scope.onChangeAcn(invalidACN[index])).toBeFalse();
-      }
+      inject(function (mainService) {
+        for (let index = 0; index < invalidACN.length; index++) {
+          expect(mainService.isAcnValid(invalidACN[index]).status).toBeFalse();
+        }
+      });
     });
 
     const wrongFormatACN = [
@@ -63,9 +65,13 @@ describe("AcnCheckController", function () {
     ];
 
     it("should be a wrong format ACN", function () {
-      for (let index = 0; index < wrongFormatACN.length; index++) {
-        expect($scope.onChangeAcn(wrongFormatACN[index])).toBeFalse();
-      }
+      inject(function (mainService) {
+        for (let index = 0; index < wrongFormatACN.length; index++) {
+          expect(
+            mainService.isAcnValid(wrongFormatACN[index]).status
+          ).toBeFalse();
+        }
+      });
     });
   });
 });

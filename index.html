@@ -43,10 +43,7 @@
               <p ng-show="form.acn.$error.format" class="text-error">
                 ACN should be 9 digits of number
               </p>
-              <p
-                ng-show="!form.acn.$error.format && form.acn.$error.acnValid"
-                class="text-error"
-              >
+              <p ng-show="form.acn.$error.acnValid" class="text-error">
                 ACN format is invalid
               </p>
             </div>
