@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="ACNApp">
+  <head>
+    <title>ACN Checker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="index.js"></script>
+
+    <!-- Use this for development. So the js not caching in browser -->
+    <!-- <script language="JavaScript">
+      var s = document.getElementsByTagName("script")[0];
+      var sc = document.createElement("script");
+      sc.type = "text/javascript";
+      sc.async = true;
+      sc.src = "index.js?v" + Math.random();
+      s.parentNode.insertBefore(sc, s);
+    </script> -->
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container" ng-controller="mainController">
+      <div class="box">
+        <h1>ACN Checker</h1>
+        <form name="form" ng-submit="onSubmit(form.$valid)" novalidate>
+          <div class="form-group">
+            <input
+              type="text"
+              name="acn"
+              class="textbox"
+              ng-model="acn"
+              ng-required="{ boolean }"
+              ng-keyup="onChangeAcn(event=$event.target.value)"
+              placeholder="Input ACN here..."
+              required
+            />
+            <p
+              ng-show="form.acn.$error.required && !form.acn.$pristine"
+              class="text-error"
+            >
+              You name is required.
+            </p>
+            <div ng-show="!form.acn.$error.required">
+              <p ng-show="form.acn.$error.format" class="text-error">
+                ACN should be 9 digits of number
+              </p>
+              <p ng-show="form.acn.$error.acnValid" class="text-error">
+                ACN format is invalid
+              </p>
+            </div>
+
+            <button type="submit" ng-disabled="form.$invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    document.write(
+      '<script src="http://' +
+        (location.host || "localhost").split(":")[0] +
+        ':35729/livereload.js?snipver=1"></' +
+        "script>"
+    );
+  </script>
+</html>

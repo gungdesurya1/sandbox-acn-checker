@@ -1,0 +1,28 @@
+{
+  "name": "sandbox-acn-checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server",
+    "live-reload": "livereload",
+    "test": "karma start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3",
+    "livereload": "^0.9.2"
+  },
+  "devDependencies": {
+    "angular": "^1.8.2",
+    "angular-mocks": "^1.8.2",
+    "angular-ui-router": "^1.0.29",
+    "jasmine": "^3.6.4",
+    "jasmine-core": "^3.6.0",
+    "karma": "^6.2.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-safari-launcher": "^1.0.0"
+  }
+}
